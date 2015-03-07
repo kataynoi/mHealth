@@ -30,7 +30,7 @@ div.card(class="mt++", ng-show="isSuccess")
                         td {{ p.NAME }} {{ p.LNAME }}
                         td {{ p.SEX }}
                         td {{ p.BIRTH | toThaiDate }}
-                        td {{ p.BIRTH }}
+                        td {{ p.BIRTH | countAge}}
                         td {{ p.TYPEAREA }}
                         td
                             lx-dropdown(position="right", from-top)

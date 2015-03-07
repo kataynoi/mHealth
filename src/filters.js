@@ -17,3 +17,18 @@ App.filter('toThaiDate', function () {
     };
 
 });
+
+App.filter('countAge', function () {
+
+    return function (t) {
+        if (!t || !moment(t).isValid()) {
+            return '-';
+        } else {
+
+               var Age = moment().get('year')-moment(t).get('year');
+
+            return Age;
+        }
+    };
+
+});
