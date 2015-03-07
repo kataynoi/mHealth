@@ -14,5 +14,8 @@
     "Dechachit Kaewmong"
   ],
   "license": "MIT",
-  "homepage": "http://mkho.moph.go.th"
+  "homepage": "http://mkho.moph.go.th",
+  "dependencies": {
+    "lumx": "~0.3.20"
+  }
 }
