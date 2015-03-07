@@ -13,7 +13,7 @@ gulp.task('jade', function () {
 
 /** JSHint **/
 gulp.task('jshint', function () {
-    return gulp.src('./src/**/*.js')
+    return gulp.src(['./src/**/*.js', './src/app.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         .pipe(gulp.dest('./app'));

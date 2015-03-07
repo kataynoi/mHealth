@@ -9,7 +9,7 @@ html(lang="en")
         link(href="../css/style.css", rel="stylesheet")
         link(href="../../vendor/mdi/css/materialdesignicons.css", rel="stylesheet")
     body(ng-app="app")
-        div.toolbar.bgc-indigo-500
+        div.toolbar.bgc-blue-grey-500
             div.toolbar__left.mr
                 button.btn.btn--l.btn--white.btn--icon(lx-ripple)
                     i.mdi.mdi-windows
@@ -29,14 +29,22 @@ html(lang="en")
                                     | &nbsp; Log out
         div(flex-container="row", flex-gutter="24")
             div(flex-item="3")
-                ul.list
-                li.list-row.list-row--has-primary.list-row--has-separator
-                    .list-primary-tile
-                        a(href="#/")
-                            i.icon.icon--l.icon--teal.icon--circled.mdi.mdi-home
-                    .list-content-tile.list-content-tile--two-lines
-                        strong Home
-                        span หน้าหลัก
+                .card
+                    ul.list(class="mt++")
+                        li.list-row.list-row--has-separator
+                            .list-row__primary
+                                a(href="#/")
+                                    i.icon.icon--l.icon--red.icon--circled.mdi.mdi-bank
+                            .list-row__content
+                                span.display-block Home
+                                span.display-block.fs-body-1.tc-black-2 หน้าหลัก
+                        li.list-row.list-row--has-separator
+                            .list-row__primary
+                                a(href="#/typearea")
+                                    i.icon.icon--l.icon--green.icon--circled.mdi.mdi-auto-fix
+                            .list-row__content
+                                span.display-block Typearea
+                                span.display-block.fs-body-1.tc-black-2 แก้ไข Typearea
 
             div(flex-item="9")
                 .card
