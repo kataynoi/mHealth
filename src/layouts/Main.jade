@@ -1,0 +1,54 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title My Application
+        link(href="../../vendor/lumx/dist/lumx.css", rel="stylesheet")
+        link(href="../css/style.css", rel="stylesheet")
+        link(href="../../vendor/mdi/css/materialdesignicons.css", rel="stylesheet")
+    body(ng-app="App")
+        div.toolbar.bgc-indigo-500
+            div.toolbar__left.mr
+                button.btn.btn--l.btn--white.btn--icon(lx-ripple)
+                    i.mdi.mdi-windows
+            span(style="color: #fff;").toolbar__label.fs-title
+                | My Application
+            div.toolbar__right
+                lx-dropdown(position="right", from-top)
+                    button(lx-ripple, lx-dropdown-toggle).btn.btn--white.btn--l.btn--icon
+                        i.mdi.mdi-dots-vertical
+                    lx-dropdown-menu
+                        ul
+                            li
+                                a.dropdown-link.dropdown-link--is-header Tools
+                            li
+                                a(href="#!/logout").dropdown-link
+                                    i.mdi.mdi-logout
+                                    | &nbsp; Log out
+        div(flex-container="row", flex-gutter="24")
+            div(flex-item="3")
+                ul.list
+                li.list-row.list-row--has-primary.list-row--has-separator
+                    .list-primary-tile
+                        a(href="#/")
+                            i.icon.icon--l.icon--teal.icon--circled.mdi.mdi-home
+                    .list-content-tile.list-content-tile--two-lines
+                        strong Home
+                        span หน้าหลัก
+
+            div(flex-item="9")
+                .card
+                    div(class="p+")
+                        block content
+
+        script(src="../../vendor/jquery/dist/jquery.min.js")
+        script(src="../../vendor/velocity/velocity.min.js")
+        script(src="../../vendor/moment/min/moment-with-locales.min.js")
+        script(src="../../vendor/angular/angular.js")
+        script(src="../../vendor/angular-route/angular-route.min.js")
+        script(src="../../vendor/lumx/dist/lumx.min.js")
+        script(src="../app.js")
+
+        block scripts

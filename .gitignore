@@ -1,2 +1,4 @@
 .idea
 vendor
+app
+node_modules
