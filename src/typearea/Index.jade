@@ -1,1 +1,51 @@
-| Typearea
+.fs-headline.display-block
+    i.mdi.mdi-auto-fix.icon.icon--l.icon--green.icon--circled
+    | &nbsp; ตรวจสอบ Typearea ซ้ำซ้อน
+div(flex-container="row", ng-hide="isSuccess")
+    div(flex-item="12")
+        br
+        div#progress
+
+div.card(class="mt++", ng-show="isSuccess")
+    lx-tabs(links-tc="light", links-bgc="light-blue-500", indicator="yellow-500", no-divider="true" z-depth="1")
+        lx-tab(heading="Typearea ซ้ำซ้อน")
+            table.data-table.data-table--has-secondary
+                thead
+                    tr
+                        th #
+                        th CID
+                        th ชื่อ - สกุล
+                        th เพศ
+                        th วันเกิด
+                        th อายุ
+                        th T
+                        th
+                    tr
+                        td(colspan="8").divider.divider--dark
+
+                tbody
+                    tr(ng-repeat="p in people").data-table__clickable-row
+                        td {{ $index+1 }}
+                        td {{ p.CID }}
+                        td {{ p.NAME }} {{ p.LNAME }}
+                        td {{ p.SEX }}
+                        td {{ p.BIRTH | toThaiDate }}
+                        td {{ p.BIRTH }}
+                        td {{ p.TYPEAREA }}
+                        td
+                            lx-dropdown(position="right", from-top)
+                                button.btn.btn--l.btn--grey.btn--icon(lx-ripple, lx-dropdown-toggle)
+                                    i.mdi.mdi-dots-vertical
+
+                                lx-dropdown-menu
+                                    ul
+                                        li
+                                            a.dropdown-link ดูข้อมูลซ้ำซ้อน
+
+                                        li
+                                            a.dropdown-link ดูข้อมูลซ้ำซ้อน
+
+
+        lx-tab(heading="CID ซ้ำซ้อน")
+            p(class="p+")
+                | xxxxxxx

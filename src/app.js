@@ -2,6 +2,7 @@
  Index module
  **/
 var App = angular.module('app', ['lumx', 'ngRoute']);
+var moment = require('moment');
 
 App.config(function($routeProvider) {
 
