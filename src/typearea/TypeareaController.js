@@ -67,9 +67,11 @@ App.controller('TypeareaController', function ($scope, $window, TypeareaService,
                 TypeareaService.confirm(cid, key)
                     .then(function (data) {
                         if (data.ok) {
-                            var idx = _.findIndex($scope.people, {cid: cid});
+                            var idx = _.findIndex($scope.people, {CID: cid});
+                            if (idx != -1) {
+                                $scope.people[idx].confirm_hospcode = $window.sessionStorage.getItem('hospcode');
+                            }
 
-                            $scope.people[idx].confirm_hospcode = $window.sessionStorage.getItem('hospcode');
                             console.log($scope.people[idx]);
                         } else {
                             if (angular.isObject(data.msg)) {
@@ -89,10 +91,17 @@ App.controller('TypeareaController', function ($scope, $window, TypeareaService,
     };
 
     $scope.checkConfirm = function (hospcode, confirm_hospcode) {
-        if (!confirm_hospcode) return 0;
-        if (confirm_hospcode && (confirm_hospcode == hospcode)) return 1;
-        if (confirm_hospcode && (confirm_hospcode != hospcode)) return 2;
-        return -1;
+        if (confirm_hospcode) {
+            if (confirm_hospcode == hospcode) {
+                return 1;
+            } else if (confirm_hospcode != hospcode) {
+                return 2;
+            } else {
+                return -1;
+            }
+        } else {
+            return 0;
+        }
     };
 
 });

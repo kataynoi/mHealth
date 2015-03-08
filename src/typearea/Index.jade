@@ -3,34 +3,43 @@ div(flex-container="row", ng-hide="isSuccess")
     div(flex-item="12")
         br
         div#progress
-.fs-title.display-block {{ msg }}
-div(class="mt++", ng-show="isSuccess")
-    lx-tabs(links-tc="light", links-bgc="indigo-500", indicator="yellow-500", no-divider="true" z-depth="1")
+
+div(ng-show="isSuccess")
+    lx-tabs(indicator="indigo-500", layout="inline", active-tab="0")
         lx-tab(heading="Typearea ซ้ำซ้อน")
-            table.data-table.data-table--has-secondary.data-table--has-primary
+            div(flex-container="row", flex-gutter="24")
+                div(flex-item="8")
+                    lx-text-field(label="ค้นหา", fixed-label="true", icon="magnify")
+                        input(type="text", ng-model="query", ng-init="query = ''")
+                div(flex-item="4")
+                    br
+                    .fs-body-2.display-block {{ msg }}
+            table.data-table.data-table--has-secondary
                 thead
                     tr
-                        th ยืนยัน
                         th #
+                        th ยืนยัน
                         th CID
                         th ชื่อ - สกุล
                         th เพศ
                         th วันเกิด
-                        th อายุ
+                        th อายุ (ปี)
                         th T
                         th
                     tr
                         td(colspan="9").divider.divider--dark
 
                 tbody
-                    tr(ng-repeat="p in people").data-table__clickable-row
+                    tr(ng-repeat="p in people | filter: {NAME: query} | orderBy:'+NAME'").data-table__clickable-row
+                        td {{ $index+1 }}
+
                         td(ng-if="checkConfirm(p.HOSPCODE, p.confirm_hospcode) == 0")
                             | &nbsp;
                         td(ng-if="checkConfirm(p.HOSPCODE, p.confirm_hospcode) == 1")
                             i.icon.icon--s.icon--green.icon--flat.mdi.mdi-checkbox-marked-circle
                         td(ng-if="checkConfirm(p.HOSPCODE, p.confirm_hospcode) == 2")
                             i.icon.icon--s.icon--red.icon--flat.mdi.mdi-close-circle
-                        td {{ $index+1 }}
+
                         td {{ p.CID }}
                         td {{ p.NAME }} {{ p.LNAME }}
                         td {{ p.SEX | sexName }}
@@ -61,7 +70,7 @@ div(class="mt++", ng-show="isSuccess")
 
         lx-tab(heading="CID ซ้ำซ้อน")
             p(class="p+")
-                | xxxxxxx
+                | Under construction
 
 lx-dialog.dialog.dialog--l#mdlDetail(onclose="closingDetail()")
     div.dialog__header
@@ -77,24 +86,24 @@ lx-dialog.dialog.dialog--l#mdlDetail(onclose="closingDetail()")
                 thead
                     tr
                         th #
-                        th เลขบัตรประชาชน
+                        //- th เลขบัตรประชาชน
                         th ชื่อ-สกุล
-                        th อายุ
+                        th อายุ (ปี)
                         th Typearea
                         th หน่วยบริการ
                     tr
-                        tbody(colspan="6").divider.divider--dark
+                        td(colspan="6").divider.divider--dark
                 tbody
                     tr(ng-repeat="i in items").data-table__clickable-row
                         td(ng-if="checkConfirm(i.HOSPCODE, i.confirm_hospcode) == 1")
                             i.icon.icon--s.icon--green.icon--flat.mdi.mdi-checkbox-marked-circle
                         td(ng-if="checkConfirm(i.HOSPCODE, i.confirm_hospcode) != 1")
                             | &nbsp;
-                        td {{ i.CID }}
+                        //- td {{ i.CID }}
                         td {{ i.NAME }} {{ i.LNAME }}
                         td {{ i.BIRTH | countAge }}
                         td {{ i.TYPEAREA }}
-                        td {{ i.HOSPCODE }} {{ i.hosname }}
+                        td {{ i.HOSPCODE }} {{ i.hospname }}
 
     div.dialog__actions
         button.btn.btn--l.btn--red.btn--raised(lx-dialog-close) ปิดหน้าต่าง
