@@ -6,7 +6,12 @@ App.controller('TypeareaController', function ($scope, TypeareaService, LxNotifi
     TypeareaService.list()
         .then(function (data) {
             if (data.ok) {
-                $scope.people = data.rows[0];
+                $scope.people = data.rows;
+                $scope.total = data.total;
+
+                if ($scope.total < 50) $scope.msg = 'ซ้ำทั้งหมด ' + $scope.total + ' คน';
+                else $scope.msg = 'แสดง 50 คน จากทั้งหมด ' + $scope.total + ' คน';
+
                 LxProgressService.linear.hide();
                 $scope.isSuccess = true;
             } else {

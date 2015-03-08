@@ -1,13 +1,11 @@
-.fs-headline.display-block
-    i.mdi.mdi-auto-fix.icon.icon--l.icon--green.icon--circled
-    | &nbsp; ตรวจสอบ Typearea ซ้ำซ้อน
+
 div(flex-container="row", ng-hide="isSuccess")
     div(flex-item="12")
         br
         div#progress
-
+.fs-title.display-block {{ msg }}
 div.card(class="mt++", ng-show="isSuccess")
-    lx-tabs(links-tc="light", links-bgc="light-blue-500", indicator="yellow-500", no-divider="true" z-depth="1")
+    lx-tabs(links-tc="light", links-bgc="indigo-500", indicator="yellow-500", no-divider="true" z-depth="1")
         lx-tab(heading="Typearea ซ้ำซ้อน")
             table.data-table.data-table--has-secondary
                 thead
