@@ -4,12 +4,13 @@ div(flex-container="row", ng-hide="isSuccess")
         br
         div#progress
 .fs-title.display-block {{ msg }}
-div.card(class="mt++", ng-show="isSuccess")
+div(class="mt++", ng-show="isSuccess")
     lx-tabs(links-tc="light", links-bgc="indigo-500", indicator="yellow-500", no-divider="true" z-depth="1")
         lx-tab(heading="Typearea ซ้ำซ้อน")
-            table.data-table.data-table--has-secondary
+            table.data-table.data-table--has-secondary.data-table--has-primary
                 thead
                     tr
+                        th ยืนยัน
                         th #
                         th CID
                         th ชื่อ - สกุล
@@ -19,10 +20,16 @@ div.card(class="mt++", ng-show="isSuccess")
                         th T
                         th
                     tr
-                        td(colspan="8").divider.divider--dark
+                        td(colspan="9").divider.divider--dark
 
                 tbody
                     tr(ng-repeat="p in people").data-table__clickable-row
+                        td(ng-if="checkConfirm(p.HOSPCODE, p.confirm_hospcode) == 0")
+                            | &nbsp;
+                        td(ng-if="checkConfirm(p.HOSPCODE, p.confirm_hospcode) == 1")
+                            i.icon.icon--s.icon--green.icon--flat.mdi.mdi-checkbox-marked-circle
+                        td(ng-if="checkConfirm(p.HOSPCODE, p.confirm_hospcode) == 2")
+                            i.icon.icon--s.icon--red.icon--flat.mdi.mdi-close-circle
                         td {{ $index+1 }}
                         td {{ p.CID }}
                         td {{ p.NAME }} {{ p.LNAME }}
@@ -46,6 +53,10 @@ div.card(class="mt++", ng-show="isSuccess")
                                             a.dropdown-link
                                              i.mdi.mdi-pencil-box
                                              | &nbsp; เปลี่ยน Typearea
+                                        li(ng-hide="checkConfirm(p.HOSPCODE, p.confirm_hospcode) > 0")
+                                            a(ng-click="confirm(p.CID)").dropdown-link
+                                                i.mdi.mdi-checkbox-marked-circle
+                                                | &nbsp; ยืนยันข้อมูล
 
 
         lx-tab(heading="CID ซ้ำซ้อน")
@@ -56,33 +67,34 @@ lx-dialog.dialog.dialog--l#mdlDetail(onclose="closingDetail()")
     div.dialog__header
         div.toolbar.bgc-light-blue-500
             span.toolbar__label.tc-white.fs-title ข้อมูลการซ้ำซ้อน
-        div.toolbar__right
-            button.btn.btn--l.btn--white.btn--icon(lx-ripple)
-                i.mdi.mdi-close
+            div.toolbar__right
+                button.btn.btn--l.btn--white.btn--icon(lx-ripple, lx-dialog-close)
+                    i.mdi.mdi-close
 
     div.dialog__content
         div(class="p+")
-            table.data-table.data-table--has-secondary
+            table.data-table.data-table--has-primary
                 thead
                     tr
                         th #
                         th เลขบัตรประชาชน
                         th ชื่อ-สกุล
-                        th เพศ
                         th อายุ
                         th Typearea
                         th หน่วยบริการ
                     tr
-                        tbody(colspan="8").divider.divider--dark
+                        tbody(colspan="6").divider.divider--dark
                 tbody
                     tr(ng-repeat="i in items").data-table__clickable-row
-                        td {{ $index+1}}
+                        td(ng-if="checkConfirm(i.HOSPCODE, i.confirm_hospcode) == 1")
+                            i.icon.icon--s.icon--green.icon--flat.mdi.mdi-checkbox-marked-circle
+                        td(ng-if="checkConfirm(i.HOSPCODE, i.confirm_hospcode) != 1")
+                            | &nbsp;
                         td {{ i.CID }}
-                        td {{ i.FNAME }} {{ i.LNAME }}
-                        td {{ i.sex | sexName }}
+                        td {{ i.NAME }} {{ i.LNAME }}
                         td {{ i.BIRTH | countAge }}
                         td {{ i.TYPEAREA }}
-                        td {{ i.hospcode }} {{ i.hospname }}
+                        td {{ i.HOSPCODE }} {{ i.hosname }}
 
     div.dialog__actions
-        button.btn.btn--l.btn--red.btn--raised ปิดหน้าต่าง
+        button.btn.btn--l.btn--red.btn--raised(lx-dialog-close) ปิดหน้าต่าง

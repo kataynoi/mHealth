@@ -7,21 +7,21 @@ App.controller('LoginController', function ($scope,$window,$rootScope,LoginServi
 
         LoginService.login($scope.username,$scope.password)
             .then(function(data){
-
+                console.log(data);
                 if(data.ok){
                     LxProgressService.linear.hide();
                     LoginService.getHospcode()
                         .then(function(hospcode) {
                             $window.sessionStorage.setItem('hosxp_hospcode', hospcode);
                             $window.sessionStorage.setItem('fullname',data.fullname);
-                            $window.sessionStorage.setItem('hospcode', data.lastname);
+                            $window.sessionStorage.setItem('hospcode', data.hospcode);
                             $window.sessionStorage.setItem('key',data.key);
                             $rootScope.fillname=data.fullname;
                             $window.location.href ="../pages/index.html";
                         }, function (err) {
                             $window.sessionStorage.setItem('hosxp_hospcode', '00000');
                             $window.sessionStorage.setItem('fullname',data.fullname);
-                            $window.sessionStorage.setItem('hospcode', data.lastname);
+                            $window.sessionStorage.setItem('hospcode', data.hospcode);
                             $window.sessionStorage.setItem('key',data.key);
                             $rootScope.fillname=data.fullname;
                             $window.location.href ="../pages/index.html";

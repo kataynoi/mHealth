@@ -6,7 +6,7 @@ App.controller('TypeareaController', function ($scope, $window, TypeareaService,
     var hospcode = $window.sessionStorage.getItem('hospcode');
     var key = $window.sessionStorage.getItem('key');
 
-    TypeareaService.list(hospcode, key)
+    TypeareaService.list(key)
         .then(function (data) {
             if (data.ok) {
                 $scope.people = data.rows;
@@ -34,7 +34,7 @@ App.controller('TypeareaController', function ($scope, $window, TypeareaService,
             LxProgressService.linear.hide();
         });
 
-    $scope.detail = function (cid, key) {
+    $scope.detail = function (cid) {
         TypeareaService.detail(cid, key)
             .then(function (data) {
                 if (data.ok) {
@@ -46,8 +46,39 @@ App.controller('TypeareaController', function ($scope, $window, TypeareaService,
                     $scope.isSuccess = true;
                 }
             }, function (err) {
-
+                LxNotificationService.error('Connection failed');
             });
+    };
+
+    $scope.confirm = function (cid) {
+        LxNotificationService.confirm('ยืนยันข้อมูล', 'คุณต้องการยืนยันข้อมูล Typearea ของคนนี้ใช่หรือไม่?', {
+            ok: 'ใช่, ฉันต้องการยืนยัน',
+            cancel: 'ไม่ใช่'
+        }, function (res) {
+            if (res) {
+                // yes
+                TypeareaService.confirm(cid, key)
+                    .then(function (data) {
+                        if (data.ok) {
+                            var idx = _.findIndex($scope.people, {cid: cid});
+
+                            $scope.people[idx].confirm_hospcode = $window.sessionStorage.getItem('hospcode');
+
+                        } else {
+
+                        }
+                    }, function (err) {
+                        LxNotificationService.error('Connection failed');
+                    });
+            }
+        });
+    };
+
+    $scope.checkConfirm = function (hospcode, confirm_hospcode) {
+        if (!confirm_hospcode) return 0;
+        if (confirm_hospcode && (confirm_hospcode == hospcode)) return 1;
+        if (confirm_hospcode && (confirm_hospcode != hospcode)) return 2;
+        return -1;
     };
 
 });
