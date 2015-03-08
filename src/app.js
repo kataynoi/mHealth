@@ -18,3 +18,12 @@ App.config(function($routeProvider) {
         .otherwise({ redirectTo: '/' });
 
 });
+
+App.controller('ToolbarController', function($scope,$rootScope,$window){
+    $rootScope.fullname=$window.sessionStorage.getItem('fullname');
+    $scope.logout=function(){
+        $window.sessionStorage.removeItem('fullname');
+        $window.sessionStorage.removeItem('key');
+        $window.location.href="../login/Login.html";
+    };
+});
