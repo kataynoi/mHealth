@@ -26,7 +26,7 @@ div.card(class="mt++", ng-show="isSuccess")
                         td {{ $index+1 }}
                         td {{ p.CID }}
                         td {{ p.NAME }} {{ p.LNAME }}
-                        td {{ p.SEX }}
+                        td {{ p.SEX | sexName }}
                         td {{ p.BIRTH | toThaiDate }}
                         td {{ p.BIRTH | countAge}}
                         td {{ p.TYPEAREA }}
@@ -38,12 +38,51 @@ div.card(class="mt++", ng-show="isSuccess")
                                 lx-dropdown-menu
                                     ul
                                         li
-                                            a.dropdown-link ดูข้อมูลซ้ำซ้อน
+                                            a(ng-click="detail(p.CID)").dropdown-link
+                                                i.mdi.mdi-tooltip-edit
+                                                | &nbsp; ดูข้อมูลซ้ำซ้อน
 
                                         li
-                                            a.dropdown-link ดูข้อมูลซ้ำซ้อน
+                                            a.dropdown-link
+                                             i.mdi.mdi-pencil-box
+                                             | &nbsp; เปลี่ยน Typearea
 
 
         lx-tab(heading="CID ซ้ำซ้อน")
             p(class="p+")
                 | xxxxxxx
+
+lx-dialog.dialog.dialog--l#mdlDetail(onclose="closingDetail()")
+    div.dialog__header
+        div.toolbar.bgc-light-blue-500
+            span.toolbar__label.tc-white.fs-title ข้อมูลการซ้ำซ้อน
+        div.toolbar__right
+            button.btn.btn--l.btn--white.btn--icon(lx-ripple)
+                i.mdi.mdi-close
+
+    div.dialog__content
+        div(class="p+")
+            table.data-table.data-table--has-secondary
+                thead
+                    tr
+                        th #
+                        th เลขบัตรประชาชน
+                        th ชื่อ-สกุล
+                        th เพศ
+                        th อายุ
+                        th Typearea
+                        th หน่วยบริการ
+                    tr
+                        tbody(colspan="8").divider.divider--dark
+                tbody
+                    tr(ng-repeat="i in items").data-table__clickable-row
+                        td {{ $index+1}}
+                        td {{ i.CID }}
+                        td {{ i.FNAME }} {{ i.LNAME }}
+                        td {{ i.sex | sexName }}
+                        td {{ i.BIRTH | countAge }}
+                        td {{ i.TYPEAREA }}
+                        td {{ i.hospcode }} {{ i.hospname }}
+
+    div.dialog__actions
+        button.btn.btn--l.btn--red.btn--raised ปิดหน้าต่าง

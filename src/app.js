@@ -1,8 +1,41 @@
 /**
  Index module
  **/
+var path = require('path'),
+    fs = require('fs'),
+    jf = require('jsonfile'),
+    gui = require('nw.gui'),
+    moment = require('moment'),
+    _ = require('lodash'),
+    win = gui.Window.get();
+
+jf.spaces = 2;
+
+var Config = {};
+Config.appPath = gui.App.dataPath;
+Config.configFile = path.join(Config.appPath, 'config.json');
+
+// Check configure file exist.
+var isExist = fs.existsSync(Config.configFile);
+// Check file if not exist.
+if (!isExist) {
+    var defaultConfig = {
+        db: {
+            host: '127.0.0.1',
+            port: 3306,
+            database: 'db',
+            user: 'user',
+            password: 'pass'
+        },
+        dc: {
+            url: 'http://localhost:3000'
+        }
+    };
+
+    jf.writeFileSync(Config.configFile, defaultConfig);
+}
+
 var App = angular.module('app', ['lumx', 'ngRoute']);
-var moment = require('moment');
 
 App.config(function($routeProvider) {
 

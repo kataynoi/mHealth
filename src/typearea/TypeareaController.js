@@ -1,9 +1,12 @@
-App.controller('TypeareaController', function ($scope, TypeareaService, LxNotificationService, LxProgressService) {
+App.controller('TypeareaController', function ($scope, $window, TypeareaService, LxNotificationService, LxProgressService, LxDialogService) {
 
     $scope.isSuccess = false;
     LxProgressService.linear.show('#5fa2db', '#progress');
 
-    TypeareaService.list()
+    var hospcode = $window.sessionStorage.getItem('hospcode');
+    var key = $window.sessionStorage.getItem('key');
+
+    TypeareaService.list(hospcode, key)
         .then(function (data) {
             if (data.ok) {
                 $scope.people = data.rows;
@@ -31,5 +34,20 @@ App.controller('TypeareaController', function ($scope, TypeareaService, LxNotifi
             LxProgressService.linear.hide();
         });
 
+    $scope.detail = function (cid, key) {
+        TypeareaService.detail(cid, key)
+            .then(function (data) {
+                if (data.ok) {
+                    $scope.items = data.rows;
+                    LxDialogService.open('mdlDetail');
+                } else {
+                    LxNotificationService.error(data.msg);
+                    LxProgressService.linear.hide();
+                    $scope.isSuccess = true;
+                }
+            }, function (err) {
+
+            });
+    };
 
 });

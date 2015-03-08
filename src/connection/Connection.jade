@@ -1,0 +1,39 @@
+extends ../layouts/Connection
+
+block scripts
+    script(src="ConnectionController.js")
+
+block content
+    div.card(style="width: 580px;", ng-controller="ConnectionController")
+        div(class="p+")
+            .fs-headline
+                i.mdi.mdi-security-network.icon.icon--l.icon--green.icon--circled
+                | &nbsp; Connection setting
+            form(name="frmConfig")
+                div(flex-container="row", flex-gutter="24")
+                    div(flex-item="6")
+                        lx-text-field(label="Host")
+                            input(type="text", ng-model="config.db.host", ng-required="true")
+                    div(flex-item="3")
+                        lx-text-field(label="Port")
+                            input(type="number", ng-model="config.db.port", ng-required="true")
+                    div(flex-item="3")
+                        lx-text-field(label="Database name")
+                            input(type="text", ng-model="config.db.database", ng-required="true")
+
+                div(flex-container="row", flex-gutter="24")
+                    div(flex-item="6")
+                        lx-text-field(label="Username")
+                            input(type="text", ng-model="config.db.user", ng-required="true")
+                    div(flex-item="6")
+                        lx-text-field(label="Password")
+                            input(type="password", ng-model="config.db.password", ng-required="true")
+
+                div(flex-container="row", flex-gutter="24")
+                    div(flex-item)
+                        lx-text-field(label="Data center url")
+                            input(type="text", ng-model="config.dc.url", ng-required="true")
+
+                div(flex-container="row", flex-gutter="24")
+                    div(flex-item)
+                        button.btn.btn--l.btn--raised.btn--green(ng-click="save()", ng-disabled="frmConfig.$invalid") Save

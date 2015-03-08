@@ -1,13 +1,17 @@
 App.factory('TypeareaService', function ($q, $http) {
 
+    var config = jf.readFileSync(Config.configFile);
     return {
-        list: function () {
+        list: function (hospcode, key) {
             var q = $q.defer();
 
             var options = {
-                url: 'http://localhost:3000/list',
+                url: config.dc.url + '/typearea/list',
                 method: 'POST',
-                data: { hospcode: '04911' }
+                data: {
+                    hospcode: hospcode,
+                    key: key
+                }
             };
 
             $http(options)
@@ -20,6 +24,29 @@ App.factory('TypeareaService', function ($q, $http) {
 
             return q.promise;
 
+        },
+
+        detail: function (cid, key) {
+            var q = $q.defer();
+
+            var options = {
+                url: config.dc.url + '/typearea/detail',
+                method: 'POST',
+                data: {
+                    cid: cid,
+                    key: key
+                }
+            };
+
+            $http(options)
+                .success(function (data) {
+                    q.resolve(data);
+                })
+                .error(function (data, status) {
+                    q.reject('Connection failed');
+                });
+
+            return q.promise;
         }
     };
 
