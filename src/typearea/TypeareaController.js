@@ -41,11 +41,18 @@ App.controller('TypeareaController', function ($scope, $window, TypeareaService,
                     $scope.items = data.rows;
                     LxDialogService.open('mdlDetail');
                 } else {
-                    LxNotificationService.error(data.msg);
-                    LxProgressService.linear.hide();
-                    $scope.isSuccess = true;
+                    if (angular.isObject(data.msg)) {
+                        console.log(data.msg);
+                        LxNotificationService.error('เกิดข้อผิดพลาดกรุณาดู Log');
+                    } else {
+                        LxNotificationService.error(data.msg);
+                        LxProgressService.linear.hide();
+                        $scope.isSuccess = true;
+                    }
+
                 }
             }, function (err) {
+                console.log(err);
                 LxNotificationService.error('Connection failed');
             });
     };
@@ -63,11 +70,18 @@ App.controller('TypeareaController', function ($scope, $window, TypeareaService,
                             var idx = _.findIndex($scope.people, {cid: cid});
 
                             $scope.people[idx].confirm_hospcode = $window.sessionStorage.getItem('hospcode');
-
+                            console.log($scope.people[idx]);
                         } else {
+                            if (angular.isObject(data.msg)) {
+                                console.log(data.msg);
+                                LxNotificationService.error('เกิดข้อผิดพลาดกรุณาดู Log');
+                            } else {
+                                LxNotificationService.error(data.msg);
+                            }
 
                         }
                     }, function (err) {
+                        console.log(err);
                         LxNotificationService.error('Connection failed');
                     });
             }
