@@ -2,7 +2,7 @@
   "name": "nw-demo",
   "version": "0.1.0",
   "description": "Mahasarakham Heath support system",
-  "main": "app/pages/index.html",
+  "main": "app/login/Login.html",
   "keywords": [
     "his",
     "health",
@@ -14,10 +14,10 @@
     "icon": "link.png",
     "toolbar": true,
     "frame": true,
-    "width": 1000,
+    "width": 1025,
     "height": 480,
     "position": "center",
-    "min_width": 1000,
+    "min_width": 1025,
     "min_height": 480
   },
   "webkit": {
