@@ -36,4 +36,7 @@ block content
 
                 div(flex-container="row", flex-gutter="24")
                     div(flex-item)
-                        button.btn.btn--l.btn--raised.btn--green(ng-click="save()", ng-disabled="frmConfig.$invalid") Save
+                        button.btn.btn--l.btn--raised.btn--green(ng-click="save()", ng-disabled="frmConfig.$invalid", lx-ripple) บันทึกข้อมูล
+                        | &nbsp;
+                        a.btn.btn--l.btn--raised.btn--grey(href="../login/Login.html", lx-ripple)
+                            | กลับหน้าล๊อกอิน

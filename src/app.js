@@ -53,10 +53,13 @@ App.config(function($routeProvider) {
 });
 
 App.controller('ToolbarController', function($scope,$rootScope,$window){
-    $rootScope.fullname=$window.sessionStorage.getItem('fullname');
-    $scope.logout=function(){
+    $rootScope.fullname = $window.sessionStorage.getItem('fullname');
+    $scope.logout = function(){
         $window.sessionStorage.removeItem('fullname');
         $window.sessionStorage.removeItem('key');
+        $window.sessionStorage.removeItem('hospcode');
+        $window.sessionStorage.removeItem('hosxp_hospcode');
+
         $window.location.href="../login/Login.html";
     };
 });

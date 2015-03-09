@@ -124,6 +124,30 @@ App.factory('TypeareaService', function ($q, $http, Common) {
                 });
 
             return q.promise;
+        },
+
+        /** Chronic **/
+        getChronic: function (hospcode, key) {
+            var q = $q.defer();
+
+            var options = {
+                url: dcUrl + '/chronic/duplicated/list',
+                method: 'POST',
+                data: {
+                    hospcode: hospcode,
+                    key: key
+                }
+            };
+
+            $http(options)
+                .success(function (data) {
+                    q.resolve(data);
+                })
+                .error(function (data, status) {
+                    q.reject('Connection failed');
+                });
+
+            return q.promise;
         }
     };
 

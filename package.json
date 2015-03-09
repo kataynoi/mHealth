@@ -44,11 +44,11 @@
     "gulp-watch": "^4.1.1"
   },
   "dependencies": {
+    "json2xls": "0.0.5",
     "jsonfile": "^2.0.0",
     "knex": "^0.7.4",
     "lodash": "^3.4.0",
     "moment": "^2.9.0",
-    "mysql": "^2.5.5",
-    "q": "^1.2.0"
+    "mysql": "^2.5.5"
   }
 }
