@@ -57,6 +57,9 @@ App.controller('ToolbarController', function($scope,$rootScope,$window){
     $scope.logout=function(){
         $window.sessionStorage.removeItem('fullname');
         $window.sessionStorage.removeItem('key');
+        $window.sessionStorage.removeItem('hospcode');
+        $window.sessionStorage.removeItem('hosxp_hospcode');
+
         $window.location.href="../login/Login.html";
     };
 });
