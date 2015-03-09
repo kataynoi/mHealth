@@ -1,0 +1,66 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title Maha Sarakham Heath Support System
+        link(href="../../vendor/lumx/dist/lumx.css", rel="stylesheet")
+        link(href="../css/style.css", rel="stylesheet")
+        link(href="../../vendor/mdi/css/materialdesignicons.css", rel="stylesheet")
+    body(ng-app="app")
+        div.toolbar.bgc-indigo-500(ng-controller="ToolbarController")
+            div.toolbar__left.mr
+                button.btn.btn--l.btn--white.btn--icon(lx-ripple)
+                    i.mdi.mdi-windows
+            span(style="color: #fff;").toolbar__label.fs-title
+                | Maha Sarakham Heath Support System
+            div.toolbar__right
+                span.tc-white {{ fullname }}
+            div.toolbar__right
+                lx-dropdown(position="right", from-top)
+                    button(lx-ripple, lx-dropdown-toggle).btn.btn--white.btn--l.btn--icon
+                        i.mdi.mdi-dots-vertical
+                    lx-dropdown-menu
+                        ul
+                            li
+                                a.dropdown-link.dropdown-link--is-header Tools
+                            li
+                                a(ng-click="logout()").dropdown-link
+                                    i.mdi.mdi-logout
+                                    | &nbsp; Log out
+        div(flex-container="row", flex-gutter="24")
+            div(flex-item="3")
+                .card
+                    ul.list(class="mt++")
+                        li.list-row.list-row--has-separator
+                            .list-row__primary
+                                a(href="#/")
+                                    i.icon.icon--l.icon--red.icon--circled.mdi.mdi-bank
+                            .list-row__content
+                                span.display-block Home
+                                span.display-block.fs-body-1.tc-black-2 หน้าหลัก
+                        li.list-row.list-row--has-separator
+                            .list-row__primary
+                                a(href="#/typearea")
+                                    i.icon.icon--l.icon--green.icon--circled.mdi.mdi-auto-fix
+                            .list-row__content
+                                span.display-block Typearea
+                                span.display-block.fs-body-1.tc-black-2 แก้ไข Typearea
+
+            div(flex-item="9")
+                .card
+                    div(class="p+")
+                        block content
+
+        script(src="../../vendor/jquery/dist/jquery.min.js")
+        script(src="../../vendor/velocity/velocity.min.js")
+        script(src="../../vendor/moment/min/moment-with-locales.min.js")
+        script(src="../../vendor/angular/angular.js")
+        script(src="../../vendor/angular-route/angular-route.min.js")
+        script(src="../../vendor/lumx/dist/lumx.min.js")
+        script(src="../app.js")
+        script(src="../common.js")
+        script(src="../filters.js")
+
+        block scripts

@@ -1,0 +1,132 @@
+
+div(flex-container="row", ng-hide="isSuccess")
+    div(flex-item="12")
+        br
+        div#progress
+
+div(ng-show="isSuccess")
+    lx-tabs(indicator="indigo-500", layout="inline", active-tab="0")
+        lx-tab(heading="Typearea ซ้ำซ้อน")
+            div(flex-container="row", flex-gutter="24")
+                div(flex-item="8")
+                    lx-text-field(label="ค้นหา", fixed-label="true", icon="magnify")
+                        input(type="text", ng-model="query", ng-init="query = ''")
+                div(flex-item="4")
+                    br
+                    .fs-body-2.display-block แสดง {{totalCurrent}} คน จากทั้งหมด {{total}} คน
+            table.data-table.data-table--has-secondary
+                thead
+                    tr
+                        th #
+                        th ยืนยัน
+                        th CID
+                        th ชื่อ - สกุล
+                        th เพศ
+                        th วันเกิด
+                        th อายุ (ปี)
+                        th T
+                        th
+                    tr
+                        td(colspan="9").divider.divider--dark
+
+                tbody
+                    tr(ng-repeat="p in people | filter: {NAME: query} | orderBy:'+NAME'").data-table__clickable-row
+                        td {{ $index+1 }}
+
+                        td(ng-if="checkConfirm(p.HOSPCODE, p.confirm_hospcode) == 0")
+                            | &nbsp;
+                        td(ng-if="checkConfirm(p.HOSPCODE, p.confirm_hospcode) == 1")
+                            i.icon.icon--s.icon--green.icon--flat.mdi.mdi-checkbox-marked-circle
+                        td(ng-if="checkConfirm(p.HOSPCODE, p.confirm_hospcode) == 2")
+                            i.icon.icon--s.icon--red.icon--flat.mdi.mdi-close-circle
+
+                        td {{ p.CID }}
+                        td {{ p.NAME }} {{ p.LNAME }}
+                        td {{ p.SEX | sexName }}
+                        td {{ p.BIRTH | toThaiDate }}
+                        td {{ p.BIRTH | countAge}}
+                        td {{ p.TYPEAREA }}
+                        td
+                            lx-dropdown(position="right", from-top)
+                                button.btn.btn--l.btn--grey.btn--icon(lx-ripple, lx-dropdown-toggle)
+                                    i.mdi.mdi-dots-vertical
+
+                                lx-dropdown-menu
+                                    ul
+                                        li
+                                            a(ng-click="detail(p.CID)").dropdown-link
+                                                i.mdi.mdi-tooltip-edit
+                                                | &nbsp; ดูข้อมูลซ้ำซ้อน
+
+                                        li(ng-hide="checkConfirm(p.HOSPCODE, p.confirm_hospcode) == 1")
+                                            a(ng-click="showConfirm(p.CID)").dropdown-link
+                                             i.mdi.mdi-pencil-box
+                                             | &nbsp; เปลี่ยน Typearea
+                                        li(ng-hide="checkConfirm(p.HOSPCODE, p.confirm_hospcode) > 0")
+                                            a(ng-click="confirm(p.CID)").dropdown-link
+                                                i.mdi.mdi-checkbox-marked-circle
+                                                | &nbsp; ยืนยันข้อมูล
+
+
+        lx-tab(heading="CID ซ้ำซ้อน")
+            p(class="p+")
+                | Under construction
+
+lx-dialog.dialog.dialog--l#mdlDetail(onclose="closingDetail()")
+    div.dialog__header
+        div.toolbar.bgc-light-blue-500
+            span.toolbar__label.tc-white.fs-title ข้อมูลการซ้ำซ้อน
+            div.toolbar__right
+                button.btn.btn--l.btn--white.btn--icon(lx-ripple, lx-dialog-close)
+                    i.mdi.mdi-close
+
+    div.dialog__content
+        div(class="p+")
+            table.data-table.data-table--has-primary
+                thead
+                    tr
+                        th #
+                        //- th เลขบัตรประชาชน
+                        th ชื่อ-สกุล
+                        th อายุ (ปี)
+                        th Typearea
+                        th หน่วยบริการ
+                    tr
+                        td(colspan="6").divider.divider--dark
+                tbody
+                    tr(ng-repeat="i in items").data-table__clickable-row
+                        td(ng-if="checkConfirm(i.HOSPCODE, i.confirm_hospcode) == 1")
+                            i.icon.icon--s.icon--green.icon--flat.mdi.mdi-checkbox-marked-circle
+                        td(ng-if="checkConfirm(i.HOSPCODE, i.confirm_hospcode) != 1")
+                            | &nbsp;
+                        //- td {{ i.CID }}
+                        td {{ i.NAME }} {{ i.LNAME }}
+                        td {{ i.BIRTH | countAge }}
+                        td {{ i.TYPEAREA }}
+                        td {{ i.HOSPCODE }} {{ i.hospname }}
+
+    div.dialog__actions
+        button.btn.btn--l.btn--red.btn--raised(lx-dialog-close) ปิดหน้าต่าง
+
+
+lx-dialog.dialog.dialog--l#mdlChangeTypearea(onclose="closingTypearea()")
+    div.dialog__header
+        div.toolbar.bgc-light-blue-500
+            span.toolbar__label.tc-white.fs-title เปลี่ยน Typearea
+            div.toolbar__right
+                button.btn.btn--l.btn--white.btn--icon(lx-ripple, lx-dialog-close)
+                    i.mdi.mdi-close
+    div.dialog__content
+        div(class="p+")
+            div(flex-container="row", flex-gutter="24")
+                div(flex-item="7")
+                    lx-text-field(label="ชื่อ-สกุล")
+                        input(type="text", ng-model="fullname", ng-disabled="true")
+                div(flex-item="5")
+                    lx-select(ng-model="selectedTypeare", placeholder="เลือก Typearea", choices="typeareas", floating-label, selection-to-model="setSelectedTypearea(data)")
+                        lx-select-selected {{$selected.name}}
+                        lx-select-choices {{$choice.name}}
+    div.dialog__actions
+        button.btn.btn--l.btn--green.btn--raised(ng-click="doConfirm()") เปลี่ยน Typearea
+        | &nbsp;
+        button.btn.btn--l.btn--grey.btn--raised(lx-dialog-close) ปิดหน้าต่าง

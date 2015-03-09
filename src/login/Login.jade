@@ -1,0 +1,21 @@
+extends ../layouts/Login
+block scripts
+    script(src="LoginController.js")
+    script(src="LoginService.js")
+block content
+    div(ng-controller="LoginController")
+        br
+        div(flex-container="row")
+            div(flex-item="12")
+                div#progress
+        br
+        div.card(style="width:400px;")
+
+            div(class="p+")
+                form(name="frmLogin")
+                    lx-text-field(label="Username", fixed-label="true", icon="account")
+                        input(type="text", ng-model="username",ng-required="true")
+
+                    lx-text-field(label="Password", fixed-label="true", icon="key")
+                        input(type="password", ng-model="password", ng-required="true")
+                    button.btn.btn--l.btn--blue.btn--raised(lx-ripple,ng-disabled="frmLogin.$invalid",ng-click="login()") Login

@@ -1,8 +1,28 @@
 {
   "name": "mHealth",
-  "version": "1.0.0",
-  "description": "Mahasarakham Heath support system",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Maha Sarakham Heath Support System",
+  "main": "app/login/Login.html",
+  "keywords": [
+    "his",
+    "health",
+    "node.js",
+    "angular"
+  ],
+  "window": {
+    "title": "Maha Sarakham Heath Support System",
+    "icon": "link.png",
+    "toolbar": true,
+    "frame": true,
+    "width": 1025,
+    "height": 580,
+    "position": "center",
+    "min_width": 1025,
+    "min_height": 580
+  },
+  "webkit": {
+    "plugin": true
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,16 +30,25 @@
     "type": "git",
     "url": "https://github.com/siteslave/mHealth"
   },
-  "keywords": [
-    "his",
-    "health",
-    "node.js",
-    "angular"
-  ],
   "author": "Satit Rianpit, Dechachit Kaewmong",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/siteslave/mHealth/issues"
   },
-  "homepage": "https://github.com/siteslave/mHealth"
+  "homepage": "https://github.com/siteslave/mHealth",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-jade": "^1.0.0",
+    "gulp-jshint": "^1.9.2",
+    "gulp-less": "^3.0.1",
+    "gulp-watch": "^4.1.1"
+  },
+  "dependencies": {
+    "jsonfile": "^2.0.0",
+    "knex": "^0.7.4",
+    "lodash": "^3.4.0",
+    "moment": "^2.9.0",
+    "mysql": "^2.5.5",
+    "q": "^1.2.0"
+  }
 }

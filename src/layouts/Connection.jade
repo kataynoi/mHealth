@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title Maha Sarakham Heath Support System
+        link(href="../../vendor/lumx/dist/lumx.css", rel="stylesheet")
+        link(href="../css/style.css", rel="stylesheet")
+        link(href="../../vendor/mdi/css/materialdesignicons.css", rel="stylesheet")
+    body(ng-app="app")
+        div.toolbar.bgc-indigo-500
+            div.toolbar__left.mr
+                button.btn.btn--l.btn--white.btn--icon(lx-ripple)
+                    i.mdi.mdi-windows
+            span(style="color: #fff;").toolbar__label.fs-title
+                | Maha Sarakham Heath Support System
+        div(flex-container="column", flex-align="space-between center")
+                block content
+
+
+        script(src="../../vendor/jquery/dist/jquery.min.js")
+        script(src="../../vendor/velocity/velocity.min.js")
+        script(src="../../vendor/moment/min/moment-with-locales.min.js")
+        script(src="../../vendor/angular/angular.js")
+        script(src="../../vendor/angular-route/angular-route.min.js")
+        script(src="../../vendor/lumx/dist/lumx.min.js")
+        script(src="../app.js")
+        script(src="../common.js")
+        script(src="../filters.js")
+
+        block scripts
