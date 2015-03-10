@@ -38,3 +38,9 @@ App.filter('sexName', function () {
         return sex == '1' ? 'ชาย' : sex == '2' ? 'หญิง' : 'ไม่ทราบ';
     };
 });
+
+App.filter('winBit', function () {
+    return function (bit) {
+        return bit == 'x64' ? 'Windows 64 bit' : bit == 'ia32' ? 'Windows 32 bit' : 'ไม่ทราบ';
+    };
+});

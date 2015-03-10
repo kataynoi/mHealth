@@ -22,6 +22,10 @@ div(ng-show="hasNewVersion")
         table.data-table
             tbody
                 tr
+                    td Processor Architecture
+                    td
+                        strong {{win | winBit}}
+                tr
                     td เวอร์ชั่น
                     td
                         strong {{newVersion}}
