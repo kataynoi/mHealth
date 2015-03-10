@@ -2,6 +2,9 @@ App.controller('IndexController', function ($scope, IndexService, LxNotification
     $scope.version = Config.version;
     $scope.hasNewVersion = false;
 
+    /*console.log('This platform is ' + process.platform);
+    console.log('This processor architecture is ' + process.arch);*/
+    $scope.win=process.arch;
     //check new version
     $scope.checkVersion = function () {
 
@@ -47,7 +50,12 @@ App.controller('IndexController', function ($scope, IndexService, LxNotification
 
                         if ($scope.hasNewVersion) {
                             $scope.hasNewVersion = true;
-                            $scope.downloadUrl = data.url;
+                            if($scope.win=='x64'){
+                                $scope.downloadUrl = data.url64;
+                            }else{
+                                $scope.downloadUrl = data.url32;
+                            }
+
                             $scope.newVersion = data.version;
                             $scope.releasedDate = data.released_date;
                             $scope.whatNew = data.what_new;
