@@ -14,6 +14,8 @@ jf.spaces = 2;
 var Config = {};
 Config.appPath = gui.App.dataPath;
 Config.configFile = path.join(Config.appPath, 'config.json');
+// File version
+Config.version = '1.0.0';
 
 // Check configure file exist.
 var isExist = fs.existsSync(Config.configFile);

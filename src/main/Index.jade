@@ -1,1 +1,40 @@
-| Main
+//div(flex-container="row", flex-gutter="24")
+//    div(flex-item="3")
+//        | Current version
+//        strong &nbsp; {{ version }}
+//    div(flex-item="3")
+//        button.btn.btn--l.btn--green.btn--raised(lx-ripple, ng-click="checkVersion()") ตรวจสอบเวอร์ชั่น
+//br
+//br
+div(flex-container="row", flex-gutter="24")
+    div(flex-item="3")
+        | Current version
+        strong &nbsp; {{ version }}
+br
+br
+div(ng-show="hasNewVersion")
+    span.fs-headline
+        i.mdi.mdi-download
+        | &nbsp; รายละเอียดโปรแกรมเวอร์ชั่นใหม่
+    br
+    br
+    .data-table-container
+        table.data-table
+            tbody
+                tr
+                    td เวอร์ชั่น
+                    td
+                        strong {{newVersion}}
+                tr
+                    td วันที่
+                    td
+                        strong {{releasedDate | toThaiDate}}
+
+                tr
+                    td มีอะไรใหม่
+                    td {{whatNew}}
+
+                tr
+                    td ดาวน์โหลด
+                    td
+                        button.btn.btn--l.btn--red.btn--raised(ng-click="doDownload(downloadUrl)") ดาวน์โหลด
