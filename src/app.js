@@ -50,6 +50,10 @@ App.config(function($routeProvider) {
             templateUrl: '../typearea/Index.html',
             controller: 'TypeareaController'
         })
+        .when('/chronic', {
+            templateUrl: '../chronic/Index.html',
+            controller: 'ChronicController'
+        })
         .otherwise({ redirectTo: '/' });
 
 });

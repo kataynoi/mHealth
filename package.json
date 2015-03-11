@@ -12,7 +12,7 @@
   "window": {
     "title": "Maha Sarakham Heath Support System",
     "icon": "link.png",
-    "toolbar": true,
+    "toolbar": false,
     "frame": true,
     "width": 1025,
     "height": 580,
