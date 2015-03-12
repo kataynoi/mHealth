@@ -67,61 +67,6 @@ div(ng-show="isSuccess")
                                                 i.mdi.mdi-checkbox-marked-circle
                                                 | &nbsp; ยืนยันข้อมูล
 
-
-        lx-tab(heading="โรคเรื้อรัง")
-            p(class="p+")
-                div(flex-container="column", flex-align="space-between center", ng-show="!chronicSuccess")
-                    div(flex-item="8")
-                        button.btn.btn--l.btn--raised.btn--red(ng-click="getChronic()") ตรวจสอบข้อมูล
-
-                    br
-                    br
-                div(flex-container="row")
-                    div(flex-item="12")
-                        div#progressChronic
-
-                div(flex-container="row", flex-gutter="24", ng-show="chronicSuccess")
-                    div(flex-item="10")
-                        lx-text-field(label="ค้นหา", fixed-label="true", icon="magnify")
-                            input(type="text", ng-model="queryChronic", ng-init="queryChronic = ''")
-                    div(flex-item="2")
-                        button.btn.btn--raised.btn--l.btn--green(ng-click="doExport()") ส่งออก
-
-                .data-table-container(ng-show="chronicSuccess")
-                    table.data-table.data-table--has-secondary
-                        thead
-                            tr
-                                th #
-                                th เลขบัตรประชาชน
-                                th ชื่อ - สกุล
-                                th วันเกิด
-                                th อายุ(ปี)
-                                th สถานบริการวินิจฉัย
-                                th Diag
-                                th
-                            tr
-                                td(colspan="8").divider--dark.divider
-                        tbody
-                            tr.data-table__clickable-row(ng-repeat="c in chronicPeople | filter: queryChronic")
-                                td {{ $index+1 }}
-                                td {{ c.CID }}
-                                td {{ c.PTNAME }}
-                                td {{ c.BIRTH | toThaiDate }}
-                                td {{ c.BIRTH | countAge }}
-                                td {{ c.HOSPCODE }} {{ c.HOSPNAME }}
-                                td {{ c.DIAGCODE }}
-                                td
-                                    lx-dropdown(position="right", from-top)
-                                        button.btn.btn--l.btn--grey.btn--icon(lx-ripple, lx-dropdown-toggle)
-                                            i.mdi.mdi-dots-vertical
-
-                                        lx-dropdown-menu
-                                            ul
-                                                li
-                                                    a(ng-click="doImportChronic(c.CID)").dropdown-link
-                                                        i.mdi.mdi-download
-                                                        | &nbsp; เก็บลงฐานข้อมูล
-
 lx-dialog.dialog.dialog--l#mdlDetail(onclose="closingDetail()")
     div.dialog__header
         div.toolbar.bgc-light-blue-500
